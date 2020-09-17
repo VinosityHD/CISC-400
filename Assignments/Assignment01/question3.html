@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 3</title>
+
+
+
+</head>
+<body>
+
+
+<script>
+
+
+
+
+    function diagonal(z){
+        var x = 0
+        while (x < z.length){
+            var y = 0
+            console.log("x", x)
+            while (y < z.length){
+                console.log(x,y);
+
+                if (z[x][y] !== 0 && x !== y) {
+                    return false
+
+                }
+                y++
+                console.log("y", y)
+
+
+
+                }
+            x++
+            }
+
+        return true
+    }
+
+
+    console.log(diagonal([[1,0,0], [0,1,0], [0,1,1]]))
+    console.log(diagonal([[1,0,0], [0,1,0], [0,0,1]]))
+
+</script>
+
+
+</body>
+</html>

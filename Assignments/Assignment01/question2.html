@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 2</title>
+
+</head>
+<body>
+
+<div id="TheDate">
+<script>
+
+
+
+    function CurrentTime() {
+
+        var x = new Date()
+
+        var str = ""
+
+        var day = x.getDay();
+        var date1 = x.getDate();
+        var month = x.getMonth();
+        var year = x.getFullYear();
+        var hour = x.getHours();
+        var minute = x.getMinutes();
+        var seconds = x.getSeconds();
+
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+        var current_day = days[day]
+        var current_month = months[month]
+
+        str = current_day+ ", " + date1 + " " + current_month+ " " +year + " | " + hour + ":" + minute + ":" + seconds;
+
+        document.getElementById("TheDate").innerHTML = str;
+
+
+    }
+    setInterval(CurrentTime, 1000);
+
+</script>
+
+</div>
+
+
+</body>
+</html>
