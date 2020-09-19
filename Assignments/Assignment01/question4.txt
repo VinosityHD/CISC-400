@@ -1,0 +1,6 @@
+immediate vs retained mode
+
+
+Retained Mode is declarative. In retained mode, the graphics library keeps a copy of the scene. When the scene needs to be updated, the graphics library is responsible for changing the scene. Considered easy and simple to use since
+
+Immediate mode is procedural. The application itself is required to maintain and update the scene. Anytime a new frame is produced, all drawing commands are requested and used to draw the scene. Considered more complex than Retained mode, but offers more flexibility and optimization.

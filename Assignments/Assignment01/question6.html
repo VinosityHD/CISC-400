@@ -1,0 +1,19 @@
+<script type="text/javascript"> //Beginning of javascript. Allows for javascript code to be used in HTML.
+    'use strict'; //Put the code in strict mode. Makes code more secure.
+    function init() { //Defines function "init".
+        const canvas = document.getElementById('webgl-canvas'); //Creates the canvas that will be used to draw on.
+        // Ensure we have a canvas
+        if (!canvas) { // If WebGL can't be used in the browser, return an error.
+            console.error('Sorry! No HTML5 Canvas was found on this page');//Display an error in the console
+            return;//ends code
+        }
+        const gl = canvas.getContext('webgl2');//Gets the context for the canvas. Will render what is drawn on the canvas.
+        // Ensure we have a context
+        const message = gl//If webGl is loaded on your screen, will you get an alert saying it was loaded successfully. If not, you will get an alert saying it was not available.
+            ? 'Hooray! You got a WebGL2 context' //If webgl is available and working, this message will be displayed in an alert.
+            : 'Sorry! WebGL is not available'; // //If webGl is not available , this message will be displayed in an alert.
+        alert(message);//Sends an alert to the user saying if webGL is available in their browser.
+    } //Close function
+    // Call init once the document has loaded
+    window.onload= init;//Calling the init function once the window has loaded
+</script> //End on javascript, closing tag
