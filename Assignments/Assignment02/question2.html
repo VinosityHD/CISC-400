@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bresenham's Line Draw Algorithm</title>
+</head>
+<body>
+<canvas id="canvas_2"></canvas>
+<script>
+
+
+
+
+function bresenham (x1, y1, x2, y2){
+
+    x_xty = x1
+    y_xty = y1
+    dx = x2 - x1
+    dy = y2 - y1
+    p = 2 * dy - dx
+    var canvas_2 = document.querySelector('#canvas_2')
+    canvas_2.width = 750;
+    canvas_2.height = 750;
+    var context = canvas_2.getContext("2d")
+
+
+    while (x_xty <= x2){
+        context.arc(x_xty, y_xty, 1, 0, Math.PI * 2, false);
+        context.fillStyle = "rgba(100, 150, 135, 1)";
+        context.fill();
+        x_xty = x_xty + 1
+        if (p < 0) {
+            p = p + 2 * dy;
+            console.log(x_xty)
+        }
+
+        else {
+
+            p = p + 2 * dy - 2 * dx
+            y_xty = y_xty + 1
+            console.log(y_xty)
+
+        }
+
+
+
+
+
+
+
+        }
+
+
+
+}
+
+
+//Based on the algorithm you taught us in class. Also based around the code mentioned in the slides.
+window.onload = bresenham(300, 500, 500, 400);
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<canvas id = 'canvas_2'></canvas>
+<script>
+    function bresenham_2(x1, y1, x2, y2) {
+
+        x = x1
+        y = y1
+        dx = x2 - x1
+        dy = y2 - y1
+        p = 2 * dy - dx
+        var canvas_2 = document.querySelector('#canvas_2')
+
+        canvas_2.width = 750;
+        canvas_2.height = 750;
+
+        var context = canvas_2.getContext("2d")
+
+
+        while (x <= x2) {
+            context.arc(x, y, 1, 0, Math.PI * 2, false);
+            context.fillStyle = "rgba(100, 150, 135, 1)";
+            context.fill();
+            x = x + 1
+            if (p < 0) {
+                p = p + 2 * dy;
+                console.log(x)
+            } else {
+
+                p = p + 2 * dy - 2 * dx
+                y = y + 1
+                console.log(y)
+
+            }
+
+        }
+    }
+
+    window.onload = bresenham_2(400, 600, 600, 800);
+</script>
+</body>
+</html>

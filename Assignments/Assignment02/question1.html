@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DDL</title>
+</head>
+<body>
+
+<canvas id="gl_canvas">
+
+
+
+
+</canvas>
+
+<script>
+
+    var x
+    var y
+    var x1
+    var y1
+    var x_prime
+    var y_prime
+    var num_of_steps
+    var x_increment
+    var y_increment
+    var flag = 1
+    var x_steps
+    var y_steps
+    const canvas = document.querySelector('#gl_canvas');
+    var context = canvas.getContext("2d")
+
+    canvas.width = 750;
+    canvas.height = 750;
+    //p1 = (5, 2), p2 = (7, 5)
+    x = 500
+    y = 200
+    x1 = 700
+    y1 = 500
+
+    x_prime = x1 - x
+    y_prime = y1 - y
+
+    if (x_prime > y_prime){
+
+        num_of_steps = x_prime
+
+    }
+    else {
+
+        num_of_steps = y_prime
+
+    }
+
+    x_increment = x_prime / num_of_steps;
+    y_increment = y_prime / num_of_steps;
+    x_steps = x
+    y_steps = y
+
+    //loop = window.setInterval
+
+    function draw_line () {
+
+        for (j = 0; j <= num_of_steps; j++) {
+            console.log(j, num_of_steps)
+            //context.beginPath()
+            context.arc(x_steps, y_steps, 1, 0, Math.PI * 2, false);
+            context.fillStyle = "rgba(225, 225, 225, 0.8)"
+            context.fill();
+            //context.closePath();
+            x_steps = x_steps + x_increment
+            y_steps = y_steps + y_increment
+
+
+
+
+        }
+
+    }
+    window.onload = draw_line();
+
+
+
+    //Based on what you showed us in class. Also based around the code found in the slides
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
