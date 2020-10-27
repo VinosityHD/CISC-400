@@ -33,15 +33,12 @@
 
     void main(void) {
       // Set the result as red
-      fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      fragColor = vec4(1.0, 0.5, 0.3, 1.0);
     }
   </script>
 
     <script type="text/javascript">
         'use strict';
-        var i
-        var k
-        var z
 
         // Global variables that are set and used
         // across the application
@@ -63,8 +60,8 @@
                 shader = gl.createShader(gl.VERTEX_SHADER);
             }
             else if (script.type === 'x-shader/x-fragment') {
-                shader = gl.createShader(gl.FRAGMENT_SHADER);}
-
+                shader = gl.createShader(gl.FRAGMENT_SHADER);
+            }
             else {
                 return null;
             }
@@ -120,29 +117,33 @@
               V1                    V2
               (-0.5, -0.5, 0)       (0.5, -0.5, 0)
             */
-            const vertices = [
 
-            ];
+            let circle;
+            circle = drawcircle(200);
+            const vertices = circle.vertices;
+            indices = circle.indices;
 
-            // Indices defined in counter-clockwise order
-            indices = [];
+            function drawcircle(numVert) {
 
-            function draw_circle(r, num_vertex){
-                k = (2 * math.PI)/num_vertex
-                for (i=0, i < num_vertex.length(), i++;;) {
-                    k += k
-                    x = math.cos(k)
-                    y = math.sin(k)
-                    z = 0
+                var object = {vertices: [], indices: []};
+                let i = 0
+                let j = 0
+                for (i = 0; i < numVert; i++) {
 
-
+                    j += Math.PI/numVert;
+                    object.vertices.push(0.50 * Math.cos(j));
+                    object.vertices.push(0.50 * Math.sin(j));
+                    object.vertices.push(1)
+                    object.indices.push(i);
 
 
 
                 }
+                return object;
 
 
             }
+
 
             // Setting up the VBO
             squareVertexBuffer = gl.createBuffer();
@@ -202,7 +203,7 @@
         }
 
         // Call init once the webpage has loaded
-        window.onload = init; {}
+        window.onload = init;
     </script>
 </head>
 
