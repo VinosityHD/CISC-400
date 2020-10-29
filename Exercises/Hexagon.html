@@ -27,7 +27,7 @@
     // Fragment shader program
     var FSHADER_SOURCE =
         'void main() {\n' +
-        '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
+        '  gl_FragColor = vec4(1.0, 0.7, 0.3, 1.0);\n' +
         '}\n';
 
     function main() {
@@ -60,8 +60,8 @@
         // Set the rotation matrix
         var ANGLE = 45.0; // The rotation angle
         //xformMatrix.setScale(2, 1.5, .75);
-        xformMatrix.setRotate(ANGLE, 0, 0, 1);
-        xformMatrix.setScale(.5, .5, .5);
+        xformMatrix.rotate(45.0, 0, 0, 1);
+        xformMatrix.scale(.5, .5, .5);
         // Pass the rotation matrix to the vertex shader
         var u_xformMatrix = gl.getUniformLocation(gl.program, 'u_xformMatrix');
         if (!u_xformMatrix) {
