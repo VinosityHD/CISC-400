@@ -1,186 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Translate a Triangle</title>
+    <title>Assigment03 Question 2</title>
 
-<body onload="main()">
-<canvas id="webgl" width="400" height="400">
-    Please use a browser that supports "canvas"
-</canvas>
-</body>
 
-<script src="https://rawgit.com/huningxin/webglbook_examples/master/lib/webgl-utils.js"></script>
-<script src="https://rawgit.com/huningxin/webglbook_examples/master/lib/webgl-debug.js"></script>
-<script src="https://rawgit.com/huningxin/webglbook_examples/master/lib/cuon-utils.js"></script>
-<script src="https://rawgit.com/huningxin/webglbook_examples/master/lib/cuon-matrix.js"></script>
-<script type="text/javascript">
+</head>
 
-    // RotatingTriangle.js (c) 2012 matsuda
-    // Vertex shader program
-    var VSHADER_SOURCE =
-        'attribute vec4 a_Position;\n' +
-        'uniform mat4 u_ModelMatrix;\n' +
-        'void main() {\n' +
-        '  gl_Position = u_ModelMatrix * a_Position;\n' +
-        '}\n';
-
-    // Fragment shader program
-    var FSHADER_SOURCE =
-        'void main() {\n' +
-        '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-        '}\n';
-
-    // Rotation angle (degrees/second)
-    var ANGLE_STEP = 45.0;
-
-    function main() {
-        // Retrieve <canvas> element
-        var canvas = document.getElementById('webgl');
-
-        // Get the rendering context for WebGL
-        var gl = getWebGLContext(canvas);
-        if (!gl) {
-            console.log('Failed to get the rendering context for WebGL');
-            return;
-        }
-
-        // Initialize shaders
-        if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
-            console.log('Failed to intialize shaders.');
-            return;
-        }
-
-        // Write the positions of vertices to a vertex shader
-        var n = initVertexBuffers(gl);
-        if (n < 0) {
-            console.log('Failed to set the positions of the vertices');
-            return;
-        }
-
-        // Specify the color for clearing <canvas>
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
-        // Get storage location of u_ModelMatrix
-        var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
-        if (!u_ModelMatrix) {
-            console.log('Failed to get the storage location of u_ModelMatrix');
-            return;
-        }
-
-        // Current rotation angle
-        var currentAngle = 0.0;
-        // Model matrix
-        var modelMatrix = new Matrix4();
-
-        // Start drawing
-        var tick = function() {
-            currentAngle = animate(currentAngle);  // Update the rotation angle
-            draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix);   // Draw the triangle
-            requestAnimationFrame(tick, canvas); // Request that the browser calls tick
-        };
-        tick();
+<style>
+    canvas{
+        background-color: indianred;
     }
 
-    // Last time that this function was called
-    var g_last = Date.now();
+</style>
 
-    function animate(angle) {
-        // Calculate the elapsed time
-        var now = Date.now();
-        var elapsed = now - g_last;
-        g_last = now;
-        // Update the current rotation angle (adjusted by the elapsed time)
-        var object = {vertices: [], indices: []};
-        let i = 0
-        let j = 0
-        for (i = 0; i < 200; i++) {
+<body>
+<canvas id="c"> </canvas>
 
-            j += 2 * Math.PI/200;
-            object.vertices.push(0.10 * Math.cos(j));
-            object.vertices.push(0.20 * Math.sin(j));
-            object.vertices.push(1)
-            object.indices.push(i);
+<script>
 
 
+        var canvas = document.getElementById('c');
+        width = canvas.width = 1000;
+        height = canvas.height = 800;
 
-        }
-        return object;
-    }
-    let circle;
-    circle = drawcircle(200);
-    const vertices = circle.vertices;
-    indices = circle.indices;
+        var ctx = canvas.getContext('2d');
+        var x = Math.random() * width;
+        var y = Math.random() * height;
+        var bound_x = 5 + Math.random() * 3;
+        var bound_y = Math.random() + 2 * 4;
 
-    function drawcircle(numVert) {
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, width, height);
+                ctx.beginPath();
+                ctx.arc(x, y, 35, 0, 2 * Math.PI, true);
+                ctx.stroke();
+                if(x + bound_x > canvas.width || x + bound_x < 0) {
+                    bound_x = -bound_x;
+                }
 
-        var object = {vertices: [], indices: []};
-        let i = 0
-        let j = 0
-        for (i = 0; i < numVert; i++) {
-
-            j += 2 * Math.PI/numVert;
-            object.vertices.push(0.10 * Math.cos(j));
-            object.vertices.push(0.20 * Math.sin(j));
-            object.vertices.push(1)
-            object.indices.push(i);
+                if(y + bound_y > canvas.height || y + bound_y < 0) {
+                    bound_y = -bound_y;
+                }
+                x = x + bound_x;
+                y = y + bound_y;
 
 
 
-        }
-        return object;
 
 
     }
 
-    function initVertexBuffers(gl) {
-        var vertices = new Float32Array ([
-            0, 0.5,   -0.5, -0.5,   0.5, -0.5
-        ]);
-        var n = 3;   // The number of vertices
-
-        // Create a buffer object
-        var vertexBuffer = gl.createBuffer();
-        if (!vertexBuffer) {
-            console.log('Failed to create the buffer object');
-            return -1;
-        }
-
-        // Bind the buffer object to target
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-        // Write date into the buffer object
-        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-        // Assign the buffer object to a_Position variable
-        var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
-        if(a_Position < 0) {
-            console.log('Failed to get the storage location of a_Position');
-            return -1;
-        }
-        gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
-
-        // Enable the assignment to a_Position variable
-        gl.enableVertexAttribArray(a_Position);
-
-        return n;
-    }
-
-    function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
-        // Set the rotation matrix
-        modelMatrix.setRotate(currentAngle, 0, 0, 1); // Rotation angle, rotation axis (0, 0, 1)
-
-        // Pass the rotation matrix to the vertex shader
-        gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-
-        // Clear <canvas>
-        gl.clear(gl.COLOR_BUFFER_BIT);
-
-        // Draw the rectangle
-        gl.drawArrays(gl.LINE_LOOP, 0, n);
-    }
-
-
+    window.onload(animate())
 
 </script>
-</head>
+
+
+
+
+</body>
 </html>
