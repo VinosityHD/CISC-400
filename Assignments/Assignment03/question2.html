@@ -25,30 +25,64 @@
         var ctx = canvas.getContext('2d');
         var x = Math.random() * width;
         var y = Math.random() * height;
+        var z = 0;
         var bound_x = 5 + Math.random() * 3;
         var bound_y = Math.random() + 2 * 4;
 
             function animate() {
-                requestAnimationFrame(animate);
+                setInterval(animate)
+                //requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, width, height);
                 ctx.beginPath();
                 ctx.arc(x, y, 35, 0, 2 * Math.PI, true);
                 ctx.stroke();
+                var new_x = Math.round(Math.random());
+                var new_y = Math.round(Math.random());
+
+                if (new_x == 1){
+
+                    x = x + 1;
+
+                }
+                else {
+
+                    x = x - 1;
+
+                }
+
+                if (new_y == 1){
+
+                    y = y + 1;
+
+                }
+                else {
+
+                    y = y - 1;
+                }
+
+
+
+
+
                 if(x + bound_x > canvas.width || x + bound_x < 0) {
                     bound_x = -bound_x;
+                    x = bound_x
+
                 }
 
                 if(y + bound_y > canvas.height || y + bound_y < 0) {
                     bound_y = -bound_y;
+                    y = bound_y
                 }
-                x = x + bound_x;
-                y = y + bound_y;
+                //x = x + bound_x;
+                //y = y + bound_y;
 
 
 
 
 
     }
+
 
     window.onload(animate())
 
